@@ -1,6 +1,6 @@
 {
   "name": "imagine-cup2020",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "description": "API Backend Server for Imagine Cup 2020",
   "author": "Cuong Nguyen <cuong.nugi@gmail.com>",
   "license": "MIT",
