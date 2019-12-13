@@ -1,4 +1,4 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class LocationDto {
   @IsNotEmpty()
@@ -6,4 +6,8 @@ export class LocationDto {
 
   @IsNotEmpty()
   longitude: number;
+
+  @IsNotEmpty()
+  @IsString()
+  registrationToken: string;
 }

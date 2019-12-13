@@ -10,9 +10,7 @@ import { AuthSourceEnums } from './enums/auth.enum';
 export class AuthController {
   private logger = new Logger('AuthController');
 
-  constructor(
-    private readonly authService: AuthService,
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Post('/signup')
   signUpEmail(@Body(ValidationPipe) authenticateEmailDto: AuthenticateEmailDto): Promise<void> {

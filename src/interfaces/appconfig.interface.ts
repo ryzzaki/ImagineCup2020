@@ -1,38 +1,41 @@
 export interface AppConfigInterface {
   serverSettings: {
-    serverMode: string,
-    port: number,
-    cookieSecret: string,
-    refreshTokenAge: number,
+    serverMode: string;
+    port: number;
+    cookieSecret: string;
+    refreshTokenAge: number;
+    azureApi: string;
+    firebaseAdminSA: string;
+    firebaseAdminUrl: string;
   };
   typeOrmSettings: {
-    host: string,
-    port: number,
-    name: string,
-    username: string,
-    password: string,
-    synchronize: boolean,
+    host: string;
+    port: number;
+    name: string;
+    username: string;
+    password: string;
+    synchronize: boolean;
   };
   redisModuleSettings: {
-    host: string,
-    port: number,
-    db: number,
-    password: string,
+    host: string;
+    port: number;
+    db: number;
+    password: string;
   };
   jwtSettings: {
-    accessPublicKey: string,
-    accessPrivateKey: string,
-    refreshPublicKey: string,
-    refreshPrivateKey: string,
-    algorithm: string,
+    accessPublicKey: string;
+    accessPrivateKey: string;
+    refreshPublicKey: string;
+    refreshPrivateKey: string;
+    algorithm: string;
   };
   authProviderSettings: {
-    googleId: string,
-    googleSecret: string,
-    facebookId: string,
-    facebookSecret: string,
+    googleId: string;
+    googleSecret: string;
+    facebookId: string;
+    facebookSecret: string;
   };
   mailerSettings: {
-    password: string,
+    password: string;
   };
 }

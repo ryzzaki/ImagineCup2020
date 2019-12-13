@@ -9,6 +9,9 @@ const appConfig: AppConfigInterface = {
     port: Number(process.env.PORT),
     cookieSecret: String(process.env.COOKIE_SECRET),
     refreshTokenAge: Number(process.env.REFRESH_TOKEN_AGE),
+    azureApi: String(process.env.AZURE_ROUTE_MATRIX),
+    firebaseAdminSA: String(process.env.FIREBASE_ADMIN_SA),
+    firebaseAdminUrl: String(process.env.FIREBASE_ADMIN_URL),
   },
   typeOrmSettings: {
     host: String(process.env.DB_HOST),

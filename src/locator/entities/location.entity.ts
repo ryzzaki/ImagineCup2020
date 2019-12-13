@@ -17,4 +17,7 @@ export class Location extends BaseEntity {
 
   @Column({ type: 'decimal' })
   longitude: number;
+
+  @Column()
+  registrationToken: string;
 }

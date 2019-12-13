@@ -18,9 +18,14 @@ export class LocatorService {
     return;
   }
 
-  async createLocation(latitude: number, longitude: number, user: User): Promise<void> {
-    await this.locationRepository.createLocation(latitude, longitude, user);
+  async createLocation(locationDto: LocationDto, user: User): Promise<void> {
+    const { latitude, longitude, registrationToken } = locationDto;
+    await this.locationRepository.createLocation(latitude, longitude, user, registrationToken);
     return;
+  }
+
+  async getUserLocation(user: User): Promise<Location> {
+    return await this.getUserLocation(user);
   }
 
   async getAllLocations(): Promise<Location[]> {
