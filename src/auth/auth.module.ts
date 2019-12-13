@@ -13,28 +13,19 @@ import { GoogleStrategy } from './strategies/google.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { dynamicJwtConfig } from '../config/jwt.config';
 import { passportConfig } from '../config/passport.config';
+import { MailerModule } from '../mailer/mailer.module';
+import { TemplatorModule } from '../templator/templator.module';
 
 @Module({
   imports: [
     PassportModule.register(passportConfig),
     JwtModule.register(dynamicJwtConfig),
-    TypeOrmModule.forFeature([
-      UserRepository,
-      UserEmailRepository,
-      UserFacebookRepository,
-      UserGoogleRepository,
-    ]),
+    TypeOrmModule.forFeature([UserRepository, UserEmailRepository, UserFacebookRepository, UserGoogleRepository]),
+    MailerModule,
+    TemplatorModule,
   ],
   controllers: [AuthController],
-  providers: [
-    AuthService,
-    JwtStrategy,
-    FacebookStrategy,
-    GoogleStrategy,
-  ],
-  exports: [
-    PassportModule,
-    JwtStrategy,
-  ],
+  providers: [AuthService, JwtStrategy, FacebookStrategy, GoogleStrategy],
+  exports: [PassportModule, JwtStrategy],
 })
 export class AuthModule {}
