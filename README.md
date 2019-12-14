@@ -6,9 +6,13 @@
 
 ## Installation
 
+Install all the necessary packages using npm:
+
 ```bash
 $ npm install
 ```
+
+To Configure Redis and PostGres SQL Database, use `.env-example` to copy & paste the variables into your own `.env` file.
 
 ## Running the API
 
