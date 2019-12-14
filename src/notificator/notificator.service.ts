@@ -104,8 +104,8 @@ export class NotificatorService {
     travelTime: number,
     description: string,
   ): Promise<{ message: admin.messaging.MulticastMessage }> {
-    // @Todo: rework the registration system for tokens
-    const registrationTokens = ['token1', 'token2'];
+    // @Todo: do code review for this token system
+    const registrationTokens = await this.locatorService.getAllTokens();
 
     const message: admin.messaging.MulticastMessage = {
       notification: {
