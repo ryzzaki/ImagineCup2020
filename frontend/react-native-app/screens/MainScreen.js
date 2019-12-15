@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Image, Linking } from 'react-native';
-// import firebase from 'react-native-firebase';
-// import {AsyncStorage} from 'react-native';
+//import firebase from 'react-native-firebase';
+//import {AsyncStorage} from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import Colors, { PRIMARY, SECONDARY, TERNARY, BACKGROUND2 } from '../styles/colors';
 import { Images } from "../styles";
@@ -65,7 +65,7 @@ export default class MainScreen extends Component {
     //     });
     // }
     state = {
-        emergency: false,//TOCHANGE,
+        emergency: true,//TOCHANGE,
         decided: false,//TOCHANGE
         ds: "5 minutes away",
         markers: [
@@ -96,7 +96,8 @@ export default class MainScreen extends Component {
                     <Image
                         source={Images.logoStandard}
                         style={styles.logo}
-                    />}
+                    />
+                    }
                 {this.state.emergency &&
                     <View style={{ flex: 1, height: '100%' }}>
                         <View

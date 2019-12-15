@@ -45,12 +45,11 @@ export default class RegisterScreen extends Component {
   }
 
   check(name, surname, loginCode) {
-    return true;
-    // return (
-    //   /^[A-Z][a-z\s-]*$/.test(name) &&
-    //   /^[A-Z][a-z\s-]*$/.test(surname) &&
-    //   /^\d{4}$/.test(loginCode)
-    // );
+    return (
+      /^[A-Z][a-z\s-]*$/.test(name) &&
+      /^[A-Z][a-z\s-]*$/.test(surname) &&
+      /^\d{4}$/.test(loginCode)
+    );
   }
 
   showPicker() {

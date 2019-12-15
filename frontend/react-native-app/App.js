@@ -23,6 +23,9 @@ export default class App extends Component {
   });
   render() {
     console.disableYellowBox = true; //for development time to disable yellow warnings inside the simulators
+      // return (
+      // < AppSwitchNavigator />
+      // );
     if(this.state.appState == 'register'){
       return (
       < RegisterSwitchNavigator />
