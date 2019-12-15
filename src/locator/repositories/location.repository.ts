@@ -34,4 +34,13 @@ export class LocationRepository extends Repository<Location> {
   async getAllLocations(): Promise<Location[]> {
     return await this.find();
   }
+
+  async getAllTokens(): Promise<string[]> {
+    const locations: Location[] = await this.find();
+    const tokens = [];
+    for (const location of locations) {
+      tokens.push(location.registrationToken);
+    }
+    return tokens;
+  }
 }
