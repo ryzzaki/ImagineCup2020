@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, TouchableOpacity, Image, Linking } from 'react-
 // import firebase from 'react-native-firebase';
 // import {AsyncStorage} from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
-import Colors, { PRIMARY, SECONDARY, TERNARY, BACKGROUND } from '../styles/colors';
+import Colors, { PRIMARY, SECONDARY, TERNARY, BACKGROUND2 } from '../styles/colors';
 import { Images } from "../styles";
 import openMap from 'react-native-open-maps';
 
@@ -65,8 +65,8 @@ export default class MainScreen extends Component {
     //     });
     // }
     state = {
-        emergency: true,//TOCHANGE,
-        decided: true,//TOCHANGE
+        emergency: false,//TOCHANGE,
+        decided: false,//TOCHANGE
         ds: "5 minutes away",
         markers: [
             {
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
         height: '100%',
         flex: 1,
         alignItems: 'stretch',
-        backgroundColor: BACKGROUND,
+        backgroundColor: BACKGROUND2,
         borderColor: Colors.buttonBorder,
         borderWidth: 2
     },

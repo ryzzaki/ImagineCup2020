@@ -37,17 +37,20 @@ export default class RegisterScreen extends Component {
   };
 
   checkPassword(password, repeatPassword) {
-    /\d/.test(this.state.password) &&
+    return (
+      /\d/.test(password) &&
       (password == repeatPassword) &&
       password.length > 7
+    );
   }
 
   check(name, surname, loginCode) {
-    return (
-      /^[A-Z][a-z\s-]*$/.test(name) &&
-      /^[A-Z][a-z\s-]*$/.test(surname) &&
-      /^\d{4}$/.test(loginCode)
-    );
+    return true;
+    // return (
+    //   /^[A-Z][a-z\s-]*$/.test(name) &&
+    //   /^[A-Z][a-z\s-]*$/.test(surname) &&
+    //   /^\d{4}$/.test(loginCode)
+    // );
   }
 
   showPicker() {
@@ -98,7 +101,7 @@ export default class RegisterScreen extends Component {
       if (this.checkPassword(this.passwordInput.state.value, this.repeatPasswordInput.state.value)) {
         console.log("Register request sent"); //TODO: send to backend
         try{
-          await AsyncStorage.setItem("@state", "submitted");
+          await AsyncStorage.setItem("@state", "app");
         }catch(e){
           console.error("Saving error");
         }
@@ -154,7 +157,7 @@ export default class RegisterScreen extends Component {
   }
 
   componentWillUnmount() {
-    this.keyboardWillShowListener.remove();
+    this.keyboardDidShowListener.remove();
     this.keyboardDidHideListener.remove();
   }
 
