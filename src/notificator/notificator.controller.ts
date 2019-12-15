@@ -7,12 +7,13 @@ import { AllowedRoles } from '../auth/decorators/allowed-roles.decorator';
 import { UserRoleEnums } from '../auth/enums/user-roles.enum';
 
 @Controller('/api/notificator')
-@UseGuards(AuthGuard(), RolesGuard)
+// @UseGuards(AuthGuard(), RolesGuard)
+@UseGuards(AuthGuard())
 export class NotificatorController {
   constructor(private readonly notificatorService: NotificatorService) {}
 
   @Post('/requireAssistance')
-  @AllowedRoles(UserRoleEnums.ADMIN, UserRoleEnums.DISPATCHER)
+  // @AllowedRoles(UserRoleEnums.ADMIN, UserRoleEnums.DISPATCHER)
   requireAssistance(@Body(ValidationPipe) originDto: OriginDto): Promise<void> {
     this.notificatorService.requireAssistance(originDto);
     return;

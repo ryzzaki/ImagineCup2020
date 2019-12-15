@@ -9,18 +9,19 @@ import { AllowedRoles } from 'src/auth/decorators/allowed-roles.decorator';
 import { UserRoleEnums } from 'src/auth/enums/user-roles.enum';
 
 @Controller('/api/locator')
-@UseGuards(AuthGuard(), RolesGuard)
+// @UseGuards(AuthGuard(), RolesGuard)
+@UseGuards(AuthGuard())
 export class LocatorController {
   constructor(private readonly locatorService: LocatorService) {}
 
   @Post('/create')
-  @AllowedRoles(UserRoleEnums.ADMIN, UserRoleEnums.USER)
+  // @AllowedRoles(UserRoleEnums.ADMIN, UserRoleEnums.USER)
   createUserLocation(@Body(ValidationPipe) locationDto: LocationDto, @GetUser() user: User): Promise<void> {
     return this.locatorService.createLocation(locationDto, user);
   }
 
   @Put('/update')
-  @AllowedRoles(UserRoleEnums.ADMIN, UserRoleEnums.USER)
+  // @AllowedRoles(UserRoleEnums.ADMIN, UserRoleEnums.USER)
   updateLocation(@Body(ValidationPipe) locationDto: LocationDto, @GetUser() user: User): Promise<void> {
     return this.locatorService.updateLocation(locationDto, user);
   }
