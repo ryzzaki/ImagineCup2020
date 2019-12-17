@@ -13,14 +13,14 @@ export class UserRepository extends Repository<User> {
       this.logger.error('User already exists');
       throw new BadRequestException('User already exists');
     }
-    return await this.createUser(email, displayName, UserRoleEnums.CLIENT);
+    return await this.createUser(email, displayName, UserRoleEnums.USER);
   }
 
   async externalAuthentication(email: string, displayName: string): Promise<User> {
     if (await this.isAnExistingUser(email)) {
       return this.existingUser;
     }
-    return await this.createUser(email, displayName, UserRoleEnums.CLIENT);
+    return await this.createUser(email, displayName, UserRoleEnums.USER);
   }
 
   async findUserByEmail(email: string): Promise<User> {
@@ -34,7 +34,7 @@ export class UserRepository extends Repository<User> {
 
   async findUserByIdToken(id: number, tokenVer: number): Promise<User> {
     try {
-      return await this.findOneOrFail({ where: { id, tokenVer }});
+      return await this.findOneOrFail({ where: { id, tokenVer } });
     } catch (error) {
       this.logger.log(`Failed to find user given id: ${id} and token ver: ${tokenVer}`);
       throw new UnauthorizedException('Failed to find user');
@@ -43,7 +43,7 @@ export class UserRepository extends Repository<User> {
 
   async findUserById(id: number): Promise<User> {
     try {
-      return await this.findOneOrFail({ where: { id }});
+      return await this.findOneOrFail({ where: { id } });
     } catch (error) {
       this.logger.log(`Failed to find user given id: ${id}`);
       throw new UnauthorizedException('Failed to find user');
@@ -75,7 +75,7 @@ export class UserRepository extends Repository<User> {
     return user;
   }
 
-  private async isAnExistingUser(email: string): Promise<boolean>  {
+  private async isAnExistingUser(email: string): Promise<boolean> {
     const user = await this.findOne({ where: { email } });
     if (user == null) {
       return false;

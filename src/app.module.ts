@@ -4,14 +4,24 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { LocatorModule } from './locator/locator.module';
 import { NotificatorModule } from './notificator/notificator.module';
-import { EmailerModule } from './emailer/emailer.module';
 import { TemplatorModule } from './templator/templator.module';
-import { MailerService } from './mailer/mailer.service';
 import { MailerModule } from './mailer/mailer.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { typeOrmConfig } from './config/typeorm.config';
+import { RedisModule } from 'nestjs-redis';
+import { redisModuleConfig } from './config/redis.config';
 
 @Module({
-  imports: [AuthModule, LocatorModule, NotificatorModule, EmailerModule, TemplatorModule, MailerModule],
+  imports: [
+    TypeOrmModule.forRoot(typeOrmConfig),
+    RedisModule.register(redisModuleConfig),
+    AuthModule,
+    LocatorModule,
+    NotificatorModule,
+    TemplatorModule,
+    MailerModule,
+  ],
   controllers: [AppController],
-  providers: [AppService, MailerService],
+  providers: [AppService],
 })
 export class AppModule {}
