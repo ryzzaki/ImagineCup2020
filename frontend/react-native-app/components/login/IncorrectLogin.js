@@ -23,6 +23,7 @@ export default class IncorrectLogin extends Component {
 const styles = StyleSheet.create({
    info: {
         color: 'red',
+        marginTop:5,
         marginBottom: 100,
         alignSelf: 'center',
    }

@@ -5328,10 +5328,10 @@ react-native-file-picker@^0.0.19:
   resolved "https://registry.yarnpkg.com/react-native-file-picker/-/react-native-file-picker-0.0.19.tgz#55cb357fae43f2daa870aa8aab201d48e147ded8"
   integrity sha512-/dMCtJR8327DUHo2v+qtSVdPL5vwN+D8004+4A6+c6U/Ira7nbjKL7zlVRCOyJ/Sl0UON/HDlPZeVQ4xnBbtcQ==
 
-react-native-firebase@^5.6.0:
-  version "5.6.0"
-  resolved "https://registry.yarnpkg.com/react-native-firebase/-/react-native-firebase-5.6.0.tgz#6f6123f53cb73477915dd55c55f3e1de91db38d2"
-  integrity sha512-I+o3zNLdIz4pxWTCSZH70M1BcPl+SdqKQfurOT0sWcaMSL2ecDqVy0PCTmN7ORt7/Z879Er6PLgA/psjArQlmw==
+react-native-firebase@5.5.5:
+  version "5.5.5"
+  resolved "https://registry.yarnpkg.com/react-native-firebase/-/react-native-firebase-5.5.5.tgz#d5c7e02eb6ea5650f9ebbb23c2cd796f83e7ca45"
+  integrity sha512-i3MBEQ2xPsEFLLp4NjK5PC4tGA4RgUdULxiTHvmi9qCM2FlVV0YhyFoO+dQIFfW2V9AzSE0v38EPCuhZDp3RdQ==
   dependencies:
     opencollective-postinstall "^2.0.0"
     prop-types "^15.7.2"

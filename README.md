@@ -4,9 +4,9 @@
   
   <p align="center">Our Imagine Cup 2020 project is built on top of NestJS. A progressive <a href="http://nodejs.org" target="blank">Node.js</a> framework for building efficient and scalable server-side applications.
   
-#####Unfortunately we didn't finish integration of frontend and backend of our project before the deadline 
-####as we thought that we will be able to continue working on it until the finals.
-####If you select our project we will fix it before that. Backend works great already, just the integration part with frontend and testing is missing.
+##Unfortunately we didn't finish integration of frontend and backend of our project before the deadline 
+##as we thought that we will be able to continue working on it until the finals.
+##If you select our project we will fix it before that. Backend works great already, just the integration part with frontend and testing is missing.
 
 ## Frontend instructions
 Install react native, yarn and launch an android emulator 

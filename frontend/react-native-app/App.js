@@ -10,17 +10,16 @@ import LoginSwitchNavigator from './navigation/LoginSwitchNavigator';
 export default class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      appState: 'register'
+    };
+    AsyncStorage.getItem('state').then((value) => {
+      if(value){
+        this.setState({ appState: value });
+      }
+    });
   }
 
-  state={
-    appState: 'register'
-  }
-
-  componentDidMount = () => AsyncStorage.getItem('@state').then((value) => {
-    if(value!=null){
-      this.setState({ 'appState': value })
-    }
-  });
   render() {
     console.disableYellowBox = true; //for development time to disable yellow warnings inside the simulators
       // return (
