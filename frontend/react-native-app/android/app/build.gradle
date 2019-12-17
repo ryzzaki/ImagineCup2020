@@ -149,9 +149,9 @@ android {
     signingConfigs {
         release {
             storeFile file('hero_keystore.keystore')
-            storePassword '.,Macius!'
+            storePassword ''
             keyAlias 'hero_key'
-            keyPassword '.,Macius'
+            keyPassword ''
         }
         debug {
             storeFile file('debug.keystore')
