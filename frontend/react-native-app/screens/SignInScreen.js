@@ -46,7 +46,7 @@ export default class RegisterScreen extends Component {
 
   async signIn() {
       //TODO check if authentic
-    if (true) {
+    if (true&&!!this.emailInput.state.value) {
       this.emailInput.handleWrong();
       this.loginCodeInput.handleWrong();
       this.passwordInput.handleWrong();
@@ -65,7 +65,7 @@ export default class RegisterScreen extends Component {
     this.setToNormal(false);
     Picker.init({
       pickerData: data,
-      pickerTitleText: 'Select your login code for this device',
+      pickerTitleText: 'Select your login code',
       selectedValue: this.state.pickerValue,
       onPickerConfirm: data => {
         this.setState({
@@ -156,7 +156,7 @@ render() {
       </View>
       {!this.state.keyboardShown && (
         <View>
-          <LoginButton label={"SignIn"}
+          <LoginButton label={"Sign in"}
             onPress={this.signIn.bind(this)} />
         </View>)}
     </ScrollView>

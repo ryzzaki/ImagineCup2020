@@ -3,10 +3,12 @@ import { Text, View, StyleSheet, TouchableOpacity, Image, Linking } from 'react-
 import firebase from 'react-native-firebase';
 import AsyncStorage from '@react-native-community/async-storage';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
-import Colors, { PRIMARY, SECONDARY, TERNARY, BACKGROUND2 } from '../styles/colors';
+import Colors, { PRIMARY, SECONDARY, TERNARY, BACKGROUND, BACKGROUND2 } from '../styles/colors';
 import { Images } from "../styles";
 import openMap from 'react-native-open-maps';
 
+const AWAITING_STATUS = "Awaiting registration confirmation";
+const ACTIVE_STATUS = "Active user";
 
 export default class MainScreen extends Component {
 
@@ -16,7 +18,7 @@ export default class MainScreen extends Component {
             emergency: false,//TOCHANGE,
             decided: false,//TOCHANGE
             ds: "5 minutes away",
-            status: "Awaiting registration confirmation",
+            status: AWAITING_STATUS,
             markers: [
                 {
                     latitude: 51.760576,
@@ -67,6 +69,53 @@ export default class MainScreen extends Component {
         }
     }
 
+    onEmergency(){
+        if(this.state.notification){
+            this.setState({
+                emergency: true,
+                ds: notification.data.description ? notification.data.description : "",
+                markers: [
+                    {
+                        latitude: notification.data.latitude ? parseFloat(notification.data.latitude) : 51.761586,
+                        longitude: notification.data.longitude ? parseFloat(notification.data.longitude) : -1.263487,
+                        title: 'Emergency!',
+                    },
+                    {
+                        latitude: 51.760586,
+                        longitude: -1.262487,
+                        title: 'Your location',
+                    }
+                ]
+            });
+        }else{
+            //For the development button
+            this.setState({
+                emergency: true,
+                ds: "",
+                markers: [
+                    {
+                        latitude: 51.761586,
+                        longitude: -1.263487,
+                        title: 'Emergency!',
+                    },
+                    {
+                        latitude: 51.760586,
+                        longitude: -1.262487,
+                        title: 'Your location',
+                    }
+                ]
+            });
+        }
+        
+    }
+
+    onAcceptance(){
+        this.setState({
+            status: ACTIVE_STATUS
+        });
+        AsyncStorage.setItem("statusInfo", ACTIVE_STATUS);
+    }
+
     async createNotificationListeners() {
         firebase.notifications().onNotification(notification => {
             notification.android.setChannelId('insider').setSound('default')
@@ -77,30 +126,12 @@ export default class MainScreen extends Component {
             console.log("new notification----" + Object.keys(notification) + "----------" + notification._title);
             firebase.notifications().displayNotification(notification);
             if (notification._title == "ATTENTION!") {
-                this.setState({
-                    emergency: true,
-                    ds: notification.data.description ? notification.data.description : "",
-                    markers: [
-                        {
-                            latitude: notification.data.latitude ? parseFloat(notification.data.latitude) : 51.761586,
-                            longitude: notification.data.longitude ? parseFloat(notification.data.longitude) : -1.263487,
-                            title: 'Emergency!',
-                        },
-                        {
-                            latitude: 51.760586,
-                            longitude: -1.262487,
-                            title: 'Your location',
-                        }
-                    ]
-                });
+               this.onEmergency();
             }
 
             if (notification._title == "Registration successful") {
                 //zmien cos w wygladzie main screena
-                this.setState({
-                    status: 'Active user'
-                });
-                AsyncStorage.setItem("statusInfo", 'Active user');
+               this.onAcceptance();
 
             }
 
@@ -123,7 +154,7 @@ export default class MainScreen extends Component {
                     <View>
                         <TouchableOpacity style={{alignSelf: 'flex-end'}} onPress={()=>{
                             AsyncStorage.setItem('state', 'register');
-                            AsyncStorage.setItem('statusInfo', "Awaiting registration confirmation");
+                            AsyncStorage.setItem('statusInfo', AWAITING_STATUS);
                             this.props.navigation.navigate('register');
                         }}>
                             <Text style={{margin: 10, color: '#1589FF', fontSize: 20 }}>Sign out</Text>
@@ -203,6 +234,20 @@ export default class MainScreen extends Component {
                             </View>}
                     </View>
                 }
+                <View style={{backgroundColor: BACKGROUND, alignItems: "center", height: 90, marginTop: 10}}>
+                    <Text style={{fontSize:20, margin: 5}}>Development only control</Text>       
+                    <View style={{flexDirection : 'row', justifyContent: "center", alignItems:"center"}}>
+                        {this.state.status==AWAITING_STATUS && <TouchableOpacity style={styles.developmentButton} onPress={this.onAcceptance.bind(this)}>
+                            <Text style={{fontSize:15}}>Activate user</Text>
+                        </TouchableOpacity>}
+                        <TouchableOpacity style={styles.developmentButton} onPress={()=>this.props.navigation.navigate('login')}>
+                            <Text style={{fontSize:15}}>Go to login page</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.developmentButton} onPress={this.onEmergency.bind(this)}>
+                            <Text style={{fontSize:15}}>Receive request</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
             </View>
         );
     }
@@ -213,7 +258,7 @@ const styles = StyleSheet.create({
         resizeMode: "contain",
         height: 400,
         width: 400,
-        marginTop: 120
+        marginTop: 80 //TOCHANGE 120
     },
     container: {
         ...StyleSheet.absoluteFillObject,
@@ -248,5 +293,14 @@ const styles = StyleSheet.create({
     label: {
         fontSize: 20,
         color: 'black'
+    },
+    developmentButton: {
+        flex: 1,
+        borderRadius: 5,
+        borderWidth: 3,
+        height: '100%',
+        alignContent: "center",
+        alignItems: "center",
+        justifyContent: 'center'
     }
 });

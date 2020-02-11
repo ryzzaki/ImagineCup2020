@@ -15,7 +15,7 @@ const Switch = createSwitchNavigator(//check passing arguments to switch navigat
     login: LoginScreen,
     signIn: SignInScreen
   },{
-    initialRouteName: 'signIn'//TOCHANGE
+    initialRouteName: 'register'//TOCHANGE
   }
 );
 

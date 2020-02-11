@@ -121,11 +121,12 @@ export default class RegisterScreen extends Component {
   }
 
   async register() {
-    if (this.areThereErrors()) {
+    if (this.areThereErrors()&&!!this.nameInput.state.value) {
       this.incorrectMessage.show();
     } else {
       try {
         await AsyncStorage.setItem("state", "login");
+        await AsyncStorage.setItem("loginCode", this.state.loginCode);
       } catch (e) {
         console.error("Saving error");
       }
